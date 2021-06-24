@@ -1,0 +1,113 @@
+SERVER SIDE:
+
+
+#!/usr/bin/python3
+import cgi
+import subprocess
+print(“context-type:text/html”)
+print()
+
+f=cgi.FieldStorage()
+cmd=f.getvalue(“x”)
+o=subprocess.getoutput(“sudo ”+cmd)
+print(o)
+
+
+CLIENT SIDE 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TASK7 - DOCKER COMMANDS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <!-- Load icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The form -->
+<form class="example" action="action_page.php">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form> 
+
+<div class="jumbotron text-center">
+  <h1>RUN DOCKER COMMANDS</h1>
+  
+</div>
+  
+
+
+<div class="container">
+  <h2>docker commands</h2>
+ 
+  <table class="commands">
+    <thead>
+      
+      <tr>
+        <th>command</th>
+        <th>usage</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+       <tr class="success">
+       <tr>
+        
+        <td>docker images</td>
+        <td>The default docker images will show all top level images, their repository and tags, and their size.
+
+</td>
+
+      </tr>      
+   </tr>
+          <tr class="danger">
+        <td>docker ps</td>
+        <td>List containers</td>
+        </tr>
+     
+     
+        <td>Docker run</td>
+        <td>the container process that runs is isolated in that it has its own file system, its own networking, and its own isolated process tree separate from the host.</td>
+        
+    
+      
+        <td>docker rm -f</td>
+        <td>Remove one or more services</td>
+      
+      
+      
+        <td>docker exec</td>
+        <td>The docker exec command runs a new command in a running container</td>
+       
+      
+    </tbody>
+  </table>
+</div>
+   <script>
+function lw(){
+var i=document.getElementById("in1").value
+var xhr=new XMLHttpRequest();
+xhr.open("GET","http://192.168.1.1/cgi-bin/?x="+i,true)
+xhr.send()
+xhr.onload=function()
+{
+var output=xhr.responseText;
+document.getElementById("d1").innerHTML=output;
+}
+}
+</script>
+Enter your command: <input id="in1"/>
+<br/>
+<pre>
+<div id ="d1">Your command output</div>
+</pre>
+
+<button onclick="lw()">click</button>
+
+
+</body>
+</html>
